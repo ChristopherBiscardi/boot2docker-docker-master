@@ -1,0 +1,9 @@
+machine:
+  services:
+    - docker
+test:
+  override:
+    - curl -O https://master.dockerproject.com/commit
+    - sed s/{commit}/$(cat commit)/g Dockerfile
+    - docker build -t bb .
+    - docker run -it bb > b2d.iso
